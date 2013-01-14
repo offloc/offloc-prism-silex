@@ -9,34 +9,38 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex\App\Admin;
+namespace Offloc\Prism\Silex\App\Api;
 
-use Offloc\Prism\Silex\App\AbstractApp;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\User\InMemoryUserProvider;
+use Dflydev\IdentityGenerator\DataStore\Dbal\DataStore;
+use Dflydev\IdentityGenerator\Generator\Base32CrockfordGenerator;
+use Dflydev\IdentityGenerator\Generator\RandomNumberGenerator;
+use Dflydev\IdentityGenerator\Generator\RandomStringGenerator;
+use Dflydev\IdentityGenerator\IdentityGenerator;
+use Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator;
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
+use Offloc\Prism\Domain\Model\Route\RouteFactory;
+use Offloc\Prism\Domain\Model\Service\ServiceFactory;
+use Offloc\Prism\Domain\Service\DflydevIdentityGeneratorService;
+use Offloc\Prism\Domain\Service\UuidSecretGeneratorService;
+use Offloc\Prism\Infrastructure\Persistence\Doctrine\Route\RouteRepository;
+use Offloc\Prism\Infrastructure\Persistence\Doctrine\Service\ServiceRepository;
+use Offloc\Prism\Infrastructure\Persistence\Doctrine\Session;
+use Silex\Application;
+use Silex\ServiceProviderInterface;
 
 /**
- * Admin App
+ * Admin Service Provider
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class Admin extends AbstractApp
+class AdminServiceProvider implements ServiceProviderInterface
 {
-    protected function configure()
+    public function boot(Application $app)
     {
-        parent::configure();
+    }
 
-        $app = $this;
-
-        $app->register(new \Silex\Provider\TwigServiceProvider, array(
-            'twig.path' => array(
-                __DIR__ . '/Resources/views',
-            ),
-        ));
-
-        $app->register(new \Silex\Provider\SessionServiceProvider);
-        $app->register(new \Silex\Provider\SecurityServiceProvider);
-
+    public function register(Application $app)
+    {
         $app['offloc.prism.admin.users'] = $app['offloc.prism.projectRoot'].'/config/admin.users.json';
 
         $app['security.firewalls'] = array(

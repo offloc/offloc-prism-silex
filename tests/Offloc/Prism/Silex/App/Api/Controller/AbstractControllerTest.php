@@ -11,7 +11,9 @@
 
 namespace Offloc\Prism\Silex\App\Api\Controller;
 
-use Offloc\Prism\Silex\App\Api\Api;
+use Offloc\Prism\Silex\App\Api\ApiConfigurer;
+use Offloc\Prism\Silex\App\AppConfigurer;
+use Silex\Application;
 use Silex\Provider;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +30,13 @@ abstract class AbstractControllerTest extends WebTestCase
      */
     public function createApplication()
     {
-        $app = new Api('test', true);
+        $app = new Application;
+
+        $app['env'] = 'test';
+        $app['debug'] = true;
+
+        AppConfigurer::configure($app);
+        ApiConfigurer::configure($app);
 
         unset($app['exception_handler']);
 

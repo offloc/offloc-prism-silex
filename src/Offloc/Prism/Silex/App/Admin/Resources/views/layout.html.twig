@@ -36,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Web Prism</a>
+          <a class="brand" href="{{ path('offloc_prism_admin_home') }}">Prism</a>
           {% if is_granted('ROLE_SUPER_ADMIN') %}
           <div class="btn-group pull-right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -50,8 +50,8 @@
           {% endif %}
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="{% if 'offloc_prism_admin_home' == app.request.attributes.get('_route') %} active {% endif %}"><a href="{{ path('offloc_prism_admin_home') }} ">Home</a></li>
-              <li class="{% if 'offloc_prism_admin_service_root' == app.request.attributes.get('_route') %} active {% endif %}"><a href="{{ path('offloc_prism_admin_service_root') }} ">Services</a></li>
+              <li class="{% if 'offloc_prism_admin_home' == app.request.attributes.get('_route') %} active {% endif %}"><a href="{{ path('offloc_prism_admin_home') }}">Home</a></li>
+              <li class="{% if 'offloc_prism_admin_service_root' == app.request.attributes.get('_route') %} active {% endif %}"><a href="{{ path('offloc_prism_admin_service_root') }}">Services</a></li>
             </ul>
           </div><!--/.nav-collapse -->
           <form class="navbar-search pull-left" method="post" action="{{ path('offloc_prism_admin_search') }}">
