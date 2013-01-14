@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex\App\Api;
+namespace Offloc\Prism\Silex\App\Admin;
 
 use Dflydev\IdentityGenerator\DataStore\Dbal\DataStore;
 use Dflydev\IdentityGenerator\Generator\Base32CrockfordGenerator;
@@ -27,6 +27,8 @@ use Offloc\Prism\Infrastructure\Persistence\Doctrine\Service\ServiceRepository;
 use Offloc\Prism\Infrastructure\Persistence\Doctrine\Session;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\User\InMemoryUserProvider;
 
 /**
  * Admin Service Provider
@@ -53,7 +55,7 @@ class AdminServiceProvider implements ServiceProviderInterface
                 'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
                 'logout' => array('logout_path' => '/logout'),
                 'users' => $app->share(function($app) {
-                    $adminUsersFile = $app['offloc.prism.admin.users'];
+                    $adminUsersFile = $app['offloc.prism.projectRoot'].'/config/admin.users.json';
 
                     $users = array();
 
