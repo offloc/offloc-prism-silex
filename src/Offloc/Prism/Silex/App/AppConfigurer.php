@@ -22,7 +22,6 @@ class AppConfigurer
 {
     public static function configure(Application $app)
     {
-        $app->register(new \Igorw\Silex\ConfigServiceProvider);
         $app->register(new \Dflydev\Silex\Provider\Psr0ResourceLocator\Psr0ResourceLocatorServiceProvider);
         $app->register(new \Dflydev\Silex\Provider\Psr0ResourceLocator\Composer\ComposerResourceLocatorServiceProvider);
         $app->register(new \Silex\Provider\UrlGeneratorServiceProvider);
