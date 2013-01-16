@@ -24,8 +24,12 @@ class AdminConfigurer
     {
         $app->register(new \Silex\Provider\TwigServiceProvider, array(
             'twig.path' => array(
-                __DIR__ . '/Resources/views',
+                $app['offloc.prism.projectRoot'].'/templates/admin',
             ),
+        ));
+
+        $app->register(new \Dflydev\Silex\Provider\Theme\ThemeServiceProvider, array(
+            'theme.docroot' => $app['offloc.prism.admin.docroot'],
         ));
 
         $app->register(new \Silex\Provider\SessionServiceProvider);
