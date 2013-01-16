@@ -32,6 +32,8 @@ abstract class AbstractControllerTest extends WebTestCase
     {
         $app = new Application;
 
+        $app['offloc.prism.projectRoot'] = __DIR__.'/Fixtures/project';
+
         $app['env'] = 'test';
         $app['debug'] = true;
 
